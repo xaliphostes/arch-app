@@ -1,0 +1,3 @@
+- Deal with group of objects
+- Deal with skin that are not constructed (see painting)
+- Deal with skin that can be created afterward

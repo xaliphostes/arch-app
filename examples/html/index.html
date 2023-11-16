@@ -1,0 +1,99 @@
+<html>
+
+<head>
+
+    <script src="https://cdn.jsdelivr.net/npm/tweakpane@3.1.0/dist/tweakpane.min.js"></script>
+    <script src="../../node_modules/@tweakpane/plugin-essentials/dist/tweakpane-plugin-essentials.min.js"
+        type="module"></script>
+    <!-- <script
+        src="https://cdn.jsdelivr.net/npm/@tormak/tweakpane-plugin-gradient@1.7.0/dist/tormak-tweakpane-plugin-gradient.min.js"></script>
+    <script src="/dist/@youwol/tweakpane.js" type="module"></script> -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script src="/dist/arch-app.js"></script>
+
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+
+    <style>
+
+        body {
+            position: relative;
+            /* overflow-x: hidden; */
+            /* background-color: #4a4a4a; */
+        }
+
+        body,
+        html {
+            height: 100%;
+        }
+
+        /* canvas {
+            width: 100%;
+            height: 100%;
+        } */
+
+        /*
+            Comment me to have the hamburger pushing the canvas
+        */
+        #c {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            padding: 5px;
+            /* z-index: 1; */
+        }
+
+        orientation-gizmo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border-radius: 100%;
+            cursor: pointer;
+        }
+
+        orientation-gizmo:hover {
+            background: rgba(255, 255, 255, .2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <div class="hstack gap-2 col-md-3 ml-2" style="align-items: top;"> -->
+    <div class="d-flex flex-row bd-highlight mb-3">
+        <div id="file-menu" style="z-index: 2; padding: 5px;"></div>
+        <div id="model-display" style="z-index: 2; padding: 5px;"></div>
+        <div id="object-display" style="z-index: 2; padding: 5px;"></div>
+        <div id="general-display" style="z-index: 2; padding: 5px;"></div>
+    </div>
+
+    <canvas id="c" style="padding: 0px; width: 100%; height: 100%;"></canvas>
+
+    <a href="http://youwol.com" target="_blank">
+        <img src="/media/youwol.png" width="150px" alt="http://www.youwol.com/"
+            style="position: fixed; right: 10px;bottom: 10px; opacity: 50%;" />
+    </a>
+
+
+    <script type="module">
+        const appLib = window['arch-app'] // the lib...
+
+        appLib.App.initialize()
+
+        // const hamburger = new archApp.Hamburger()
+    </script>
+</body>
+
+</html>

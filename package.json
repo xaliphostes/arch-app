@@ -1,0 +1,86 @@
+{
+    "name": "arch-app",
+    "version": "0.1.0",
+    "description": "",
+    "author": "fmaerten",
+    "keywords": [],
+    "main": "dist/arche-app.js",
+    "types": "src/index.ts",
+    "scripts": {
+        "build": "yarn build:dev",
+        "build:dev": "webpack --mode development",
+        "build:prod": "webpack --mode production",
+        "test": "jest -c ./jest.config.js --rootDir .",
+        "test-coverage": "jest -c ./jest.config.js --rootDir . --collect-coverage --collectCoverageFrom=./src/lib/**/*.ts ",
+        "doc": "typedoc --options typedoc.json",
+        "publish-npm-public": "yarn build:prod && yarn test-coverage && yarn publish --access public",
+        "serve": "http-server . -p 92 -o /examples/html/index.html"
+    },
+    "devDependencies": {
+        "@types/filesystem": "0.0.32",
+        "@types/jest": "29.2.3",
+        "@types/node": "18.11.9",
+        "@typescript-eslint/eslint-plugin": "^5.33.1",
+        "@typescript-eslint/parser": "^5.33.1",
+        "@youwol/eslint-config": "^0.0.4",
+        "@youwol/prettier-config": "^0.0.2",
+        "eslint": "8.22.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-eslint-comments": "^3.2.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jest": "^26.8.4",
+        "eslint-plugin-tsdoc": "^0.2.16",
+        "eslint-plugin-unused-imports": "^2.0.0",
+        "jest": "29.3.1",
+        "jest-environment-jsdom": "^29.3.1",
+        "jest-junit": "15.0.0",
+        "prettier": "^2.7.1",
+        "prettier-plugin-properties": "^0.2.0",
+        "serve": "http-server . -p 92 -o /examples/html/index.html",
+        "ts-jest": "29.0.3",
+        "ts-loader": "9.4.1",
+        "tslib": "^2.4.1",
+        "typedoc": "^0.23.21",
+        "typescript": "4.9.3",
+        "webpack": "5.75.0",
+        "webpack-cli": "5.0.0"
+    },
+    "youwol": {
+        "pipeline": {
+            "name": "yw_pipeline_webpack_ts",
+            "version": "0.0.0"
+        },
+        "cdnDependencies": {}
+    },
+    "prettier": "@youwol/prettier-config",
+    "eslintConfig": {
+        "extends": [
+            "@youwol"
+        ],
+        "overrides": [
+            {
+                "files": "examples/**/*.js",
+                "env": {
+                    "node": true
+                }
+            }
+        ]
+    },
+    "dependencies": {
+        "@tweakpane/core": "^2.0.1",
+        "@tweakpane/plugin-camerakit": "^0.3.0",
+        "@tweakpane/plugin-essentials": "^0.2.0",
+        "@tweakpane/plugin-interval": "^0.3.0",
+        "@types/jquery": "^3.5.27",
+        "@youwol/dataframe": "^0.1.0",
+        "@youwol/geometry": "^0.1.0",
+        "@youwol/io": "^0.1.0",
+        "@youwol/kepler": "^0.1.1",
+        "@youwol/math": "^0.1.0",
+        "@youwol/three-extra": "^0.1.4",
+        "jquery": "^3.7.1",
+        "three": "^0.152.0",
+        "tweakpane": "^4.0.1",
+        "tween.js": "^16.6.0"
+    }
+}
