@@ -6,7 +6,7 @@ src/auto_generated.ts
 
 .yw_pipeline/__pycache__
 
-/dist/*
+dist
 !/dist/docs/
 !/dist/docs/*
 !/dist/docs/**/*
