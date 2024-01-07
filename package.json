@@ -14,7 +14,7 @@
         "test-coverage": "jest -c ./jest.config.js --rootDir . --collect-coverage --collectCoverageFrom=./src/lib/**/*.ts ",
         "doc": "typedoc --options typedoc.json",
         "publish-npm-public": "yarn build:prod && yarn test-coverage && yarn publish --access public",
-        "serve": "http-server . -p 92 -o /examples/html/index.html"
+        "serve": "http-server . -p 92 -o /index.html"
     },
     "devDependencies": {
         "@types/filesystem": "0.0.32",
