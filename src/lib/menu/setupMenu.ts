@@ -81,8 +81,8 @@ function prepareDom() {
             Files
         </a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" id="load-faults">Load faults</a></li>
-            <li><a class="dropdown-item" href="#">Load grids</a></li>
+            <li><a class="dropdown-item" href="#" id="load-faults">Load faults (Gocad TS files)</a></li>
+            <li><a class="dropdown-item" href="#">Load grids (Gocad TS files)</a></li>
         </ul>
     </li>`)
 
@@ -111,7 +111,7 @@ function prepareDom() {
             Object
         </a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" id="fault-display">Display</a></li>
+
             <li><a class="dropdown-item" href="#" id="fault-export-ply">Export PLY</a></li>
             <li><a class="dropdown-item" href="#" id="fault-export-gltf">Export GLTF</a></li>
             <li><a class="dropdown-item" href="#" id="fault-edit">Edit</a></li>

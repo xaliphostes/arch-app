@@ -47,7 +47,7 @@ export class Picker2 {
             };
         }());
 
-        {
+        if (0) {
             const g = document.getElementById('fault-display')
             g.addEventListener('click', e => {
                 this.displayPanel()
@@ -124,14 +124,14 @@ export class Picker2 {
             // The closest pickable object...
             const object = intersectedObject(intersects)
             if (object !== undefined) {
-                if (object !== this.curSelection) {
+                /*if (object !== this.curSelection)*/ {
                     this.curSelection = object
                     glParameters.lastSelection = object
                     this.displayPanel()
                 }
-                else {
-                    // Do nothing as the panel is already here
-                }
+                // else {
+                //     // Do nothing as the panel is already here
+                // }
             }
             else {
                 this.hidePanel()
@@ -182,7 +182,7 @@ export class Picker2 {
         // this.panel = parent
         generatePanel({
             panelName: 'surface-display',
-            title: 'Surface display',
+            title: `Display for ${this.curSelection.name}`,
             panelDiv: 'fault-display-panel',
             mesh: this.curSelection
         })

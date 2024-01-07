@@ -77,6 +77,7 @@ export function doOneSurfaceFromBuffer(buffer, group: Group) {
         surface.userData.isPickable = true
         surface.userData.visi = true
         surface.userData.type = 'fault'
+        surface.name = `loaded-fault-${i + 1}`
         surface.userData.name = `loaded-fault-${i + 1}`
 
         group.add(surface)

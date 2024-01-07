@@ -13663,14 +13663,14 @@ class Picker2 {
                 // The closest pickable object...
                 const object = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.intersectedObject)(intersects);
                 if (object !== undefined) {
-                    if (object !== this.curSelection) {
+                    /*if (object !== this.curSelection)*/ {
                         this.curSelection = object;
                         _gl__WEBPACK_IMPORTED_MODULE_1__.glParameters.lastSelection = object;
                         this.displayPanel();
                     }
-                    else {
-                        // Do nothing as the panel is already here
-                    }
+                    // else {
+                    //     // Do nothing as the panel is already here
+                    // }
                 }
                 else {
                     this.hidePanel();
@@ -13699,12 +13699,7 @@ class Picker2 {
                 window.URL.revokeObjectURL(url);
             };
         }());
-        {
-            const g = document.getElementById('fault-display');
-            g.addEventListener('click', e => {
-                this.displayPanel();
-            });
-        }
+        if (false) {}
         {
             const g = document.getElementById('fault-export-ply');
             g.addEventListener('click', e => {
@@ -13785,7 +13780,7 @@ class Picker2 {
         // this.panel = parent
         (0,_panels_generatePanel__WEBPACK_IMPORTED_MODULE_3__.generatePanel)({
             panelName: 'surface-display',
-            title: 'Surface display',
+            title: `Display for ${this.curSelection.name}`,
             panelDiv: 'fault-display-panel',
             mesh: this.curSelection
         });
@@ -14966,6 +14961,7 @@ function doOneSurfaceFromBuffer(buffer, group) {
         surface.userData.isPickable = true;
         surface.userData.visi = true;
         surface.userData.type = 'fault';
+        surface.name = `loaded-fault-${i + 1}`;
         surface.userData.name = `loaded-fault-${i + 1}`;
         group.add(surface);
         _arch_Model__WEBPACK_IMPORTED_MODULE_8__.model.addObject(surface);
@@ -15188,6 +15184,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function generateMenu({ panelName, title, menuDiv, panelDiv }) {
     const g = document.getElementById(menuDiv);
+    if (g === null) {
+        console.warn(`HTMLElement ${menuDiv} is unknown`);
+        return;
+    }
     g.addEventListener('click', e => {
         const parentDiv = document.getElementById('panels-container');
         const div = document.createElement('div');
@@ -15341,8 +15341,8 @@ function prepareDom() {
             Files
         </a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" id="load-faults">Load faults</a></li>
-            <li><a class="dropdown-item" href="#">Load grids</a></li>
+            <li><a class="dropdown-item" href="#" id="load-faults">Load faults (Gocad TS files)</a></li>
+            <li><a class="dropdown-item" href="#">Load grids (Gocad TS files)</a></li>
         </ul>
     </li>`);
     builder.append(`
@@ -15369,7 +15369,7 @@ function prepareDom() {
             Object
         </a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" id="fault-display">Display</a></li>
+
             <li><a class="dropdown-item" href="#" id="fault-export-ply">Export PLY</a></li>
             <li><a class="dropdown-item" href="#" id="fault-export-gltf">Export GLTF</a></li>
             <li><a class="dropdown-item" href="#" id="fault-edit">Edit</a></li>

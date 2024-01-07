@@ -12,6 +12,11 @@ export type MenuParameters = {
 export function generateMenu({ panelName, title, menuDiv, panelDiv }: MenuParameters) {
     const g = document.getElementById(menuDiv)
 
+    if (g === null) {
+        console.warn(`HTMLElement ${menuDiv} is unknown`)
+        return
+    }
+
     g.addEventListener('click', e => {
         const parentDiv: HTMLElement = document.getElementById('panels-container')
 
