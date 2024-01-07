@@ -1,19 +1,19 @@
 import { Skin } from './Skin'
 import { Object3D } from 'three'
 import * as kepler from "@youwol/kepler"
-import { Surface } from '../loaders'
+import { Surface } from '../loaders/surfaces'
 import { FolderApi, Pane } from 'tweakpane'
-import { ColorGUIHelper } from '../utils'
+import { ColorGUIHelper } from '../gl-helpers/utils'
 
-export const Points = {
+export const Borders = {
 
     createObject: (parent: Surface): Object3D => {
-        const skin = kepler.createPointset({
-            position: parent.positions,
-            parameters: new kepler.PointsetParameters({
-                size: 5,
-                color: "#ff0000",
-                sizeAttenuation: true
+        const skin = kepler.createSurfaceBorders({
+            mesh: parent.surface,
+            parameters: new kepler.LinesetParameters({
+                color: '#000000',
+                useTube: false,
+                tubeRadius: 1
             })
         })
 
@@ -26,13 +26,11 @@ export const Points = {
 
     createPanel: (object: Object3D, parent: Pane): FolderApi => {
         const folder = parent.addFolder({
-            title: 'Points'
+            title: 'Borders'
         })
 
         folder.addBinding(object, 'visible', { label: 'Show' })
         folder.addBinding(new ColorGUIHelper(object.material, 'color'), 'value', { label: 'Color' })
-        folder.addBinding(object.material, 'size', { label: 'Size' })
-        folder.addBinding(object.material, 'sizeAttenuation', { label: 'Attenuation' })
 
         folder.expanded = false
         return folder

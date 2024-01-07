@@ -1,5 +1,5 @@
 import { Scene, Object3D, Vector3, Camera } from 'three'
-import { Controls } from '../utils'
+import { Controls } from '../gl-helpers/utils'
 import { fitScene } from './fitScene'
 
 export function changeView(viewName: string,

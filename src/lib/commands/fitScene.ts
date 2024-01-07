@@ -1,4 +1,4 @@
-import { Controls, isPickable } from '../utils'
+import { Controls, isPickable } from '../gl-helpers/utils'
 import { Object3D, PerspectiveCamera, Vector3, Camera, Box3 } from 'three'
 
 export function fitScene(

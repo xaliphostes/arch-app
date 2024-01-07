@@ -1,6 +1,8 @@
 import { Mesh, MeshPhongMaterial, BoxGeometry, SphereGeometry } from 'three'
-import { createBasePlane, createDefaultLights, glParameters } from './gl'
-import { fitScene } from './commands/fitScene';
+import { fitScene } from '../commands/fitScene';
+import { createBasePlane } from '../commands/createBasePlane';
+import { glParameters } from './gl';
+import { createDefaultLights } from '../commands/createDefaultLights';
 
 // import { addMesh } from './gl'
 
@@ -17,6 +19,7 @@ export function populateGlDebug() {
         const mesh = new Mesh(geometry, material)
         mesh.translateX(-1)
         mesh.name = 'Sphere'
+        glParameters.group.add(mesh)
         // addMesh({ mesh, group: glParameters.group })
     }
     {
@@ -30,11 +33,11 @@ export function populateGlDebug() {
         const mesh = new Mesh(geometry, material)
         mesh.translateX(1)
         mesh.name = 'Box'
+        glParameters.group.add(mesh)
         // addMesh({ mesh, group: glParameters.group })
     }
 
     createDefaultLights(glParameters.group)
-
     createBasePlane(glParameters.group)
 
     fitScene({

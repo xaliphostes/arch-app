@@ -1,6 +1,6 @@
-import { doOneSurfaceFromBuffer } from "../loaders"
+import { doOneSurfaceFromBuffer } from "../loaders/surfaces"
 import { Pane } from "tweakpane"
-import { glParameters } from "../gl"
+import { glParameters } from '../gl-helpers/gl'
 import { fitScene } from "../commands/fitScene"
 
 export function createMenuFile() {

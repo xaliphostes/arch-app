@@ -1,9 +1,9 @@
 import { Skin } from './Skin'
 import { Object3D } from 'three'
 import * as kepler from "@youwol/kepler"
-import { Surface } from '../loaders'
+import { Surface } from '../loaders/surfaces'
 import { FolderApi, Pane } from 'tweakpane'
-import { ColorGUIHelper } from '../utils'
+import { ColorGUIHelper } from '../gl-helpers/utils'
 
 export const Colored = {
 

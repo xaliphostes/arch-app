@@ -1,6 +1,10 @@
+/*
+    O B S O L E T E
+*/
+
 import { Object3D } from 'three'
 import { FolderApi, ListBladeApi, Pane, TabApi, TextBladeApi } from "tweakpane"
-import { GLParameters, glParameters } from './gl'
+import { GLParameters, glParameters } from "./gl-helpers/gl"
 
 export type ContainerType = Pane | FolderApi
 
@@ -72,6 +76,10 @@ export class PanelsContainer {
         }
 
         this.displayPanel(undefined)
+    }
+
+    setExpanded(e: boolean) {
+        this.parent.expanded = e
     }
 
     hide() {

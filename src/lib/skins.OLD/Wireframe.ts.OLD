@@ -1,25 +1,31 @@
 import { Skin } from './Skin'
 import { Object3D } from 'three'
 import * as kepler from "@youwol/kepler"
-import { Surface } from '../loaders'
+import { Surface } from '../loaders/surfaces'
 import { FolderApi, Pane } from 'tweakpane'
-import { ColorGUIHelper } from '../utils'
+import { ColorGUIHelper } from '../gl-helpers/utils'
 
-export const BBox = {
+export const Wireframe = {
 
     createObject: (parent: Surface): Object3D => {
-        const skin = kepler.createBBox(parent.surface, new kepler.BBoxParameters({ color: '#000000' }))
+        const skin = kepler.createSurface({
+            positions: parent.positions,
+            indices: parent.indices,
+            parameters: new kepler.SurfaceParameters({
+                wireframe: true,
+                color: '#000000',
+                opacity: 1
+            })
+        })
 
-        skin.visible = false
         skin.userData.pickable = false
-        parent.surface.add(skin)
 
         return skin
     },
 
     createPanel: (object: Object3D, parent: Pane): FolderApi => {
         const folder = parent.addFolder({
-            title: 'Bounding box'
+            title: 'Wireframe'
         })
 
         folder.addBinding(object, 'visible', { label: 'Show' })

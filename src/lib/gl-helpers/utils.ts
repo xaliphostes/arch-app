@@ -45,8 +45,26 @@ export function intersectedObject(intersects: Object3D[]) {
     for (let i = 0; i < intersects.length; ++i) {
         if (isPickable(intersects[i].object)) {
             object = intersects[i].object
+
+            // ________________________________________________
+            console.log('to be removed ?')
+            if (object.userData.hasSurfaceParent) {
+                object = object.parent
+            }
+            // ________________________________________________
+
             break
         }
     }
     return object
+}
+
+export function createGrayColor(intensity) {
+    if (intensity === 0) {
+        return '#000000'
+    }
+    const value = intensity * 0xFF | 0
+    const grayscale = (value << 16) | (value << 8) | value
+    const gray = grayscale.toString(16)
+    return gray.length === 5 ? '#0' + gray : '#' + gray
 }

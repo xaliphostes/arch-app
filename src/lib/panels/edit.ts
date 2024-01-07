@@ -1,13 +1,20 @@
 import { Object3D } from 'three'
 import { ListBladeApi, FolderApi } from 'tweakpane'
-import { Transformer } from '../Transformer'
-import { GLParameters, glParameters } from '../gl'
+import { Transformer } from '../gl-helpers/Transformer'
+import { GLParameters, glParameters } from '../gl-helpers/gl'
 import { App } from '../App'
 
 export function editPanel(
     { mesh, params, parent }:
     { mesh: Object3D, params: GLParameters, parent: FolderApi }): void
 {
+    if (!mesh) {
+        return
+    }
+    
+    const e = document.getElementById('tool-bar')
+    e.hidden = false
+
     // Geometry edition...
     let mode = 'translate'
     const b = parent.addBlade({
@@ -59,7 +66,7 @@ export function editPanel(
         btn.on('click', () => {
             if (mesh !== undefined) {
                 glParameters.group.remove(mesh)
-                App.objectPanel().hide()
+                // App.objectPanel().hide()
             }
         })
     }

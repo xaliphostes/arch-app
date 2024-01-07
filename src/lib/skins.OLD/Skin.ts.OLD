@@ -1,6 +1,6 @@
 import { Object3D } from 'three'
 import { FolderApi, Pane } from 'tweakpane'
-import { Surface } from '../loaders'
+import { Surface } from '../loaders/surfaces'
 
 export type Skin = {
     createObject: (parent: Surface) => Object3D,

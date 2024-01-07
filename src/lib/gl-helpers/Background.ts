@@ -8,7 +8,7 @@ export type Index = {
 export class Background {
     private indices_: Index[] = []
 
-    constructor({ start = { color: '#ccc', pos: 1 }, stop = { color: '#222', pos: 0 } }: { start?: Index, stop?: Index } = {}) {
+    constructor({ start = { color: '#222222', pos: 1 }, stop = { color: '#000000', pos: 0 } }: { start?: Index, stop?: Index } = {}) {
         if (start) {
             this.indices_.push(start)
         }

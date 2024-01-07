@@ -1,7 +1,17 @@
+/*
+    NOT USED FOR THE MOMENT
+*/
+
 import { Camera, WebGLRenderer, Scene, Raycaster, Vector2, Object3D, ArrowHelper } from 'three'
 import { TrackballControls } from '@youwol/three-extra'
-import { PanelsContainer } from './PanelsContainer'
+import { PanelsContainer } from '../PanelsContainer'
 import { intersectedObject, isPickable } from './utils'
+
+/**
+ * For object outline, see
+ * Running exampple: https://threejs.org/examples/?q=out#webgl_postprocessing_outline
+ * Sources: https://github.com/mrdoob/three.js/blob/master/examples/webgl_postprocessing_outline.html
+ */
 
 export class Picker {
     renderer: WebGLRenderer = undefined
@@ -57,8 +67,6 @@ export class Picker {
 
         this.raycaster.setFromCamera(this.pointer, this.camera)
         const intersects = this.raycaster.intersectObjects(this.scene.children)
-
-        // console.log(intersects)
         
         if (intersects.length === 0) {
             this.container.hide()
@@ -71,6 +79,7 @@ export class Picker {
                 if (object !== this.curSelection) {
                     this.container.displayPanel(object)
                     this.curSelection = object
+                    this.container.setExpanded(true)
                 }
                 else {
                     // Do nothing as the panel is already here

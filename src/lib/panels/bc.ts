@@ -1,11 +1,14 @@
 import { Object3D } from 'three'
 import { FolderApi } from 'tweakpane'
-import { GLParameters } from '../gl'
+import { GLParameters } from '../gl-helpers/gl'
 
 export function bcPanel(
     { mesh, params, parent }:
     { mesh: Object3D, params: GLParameters, parent: FolderApi }): void
 {
+    if (!mesh) {
+        return
+    }
 
     const setupObject = mesh.userData.setup
 

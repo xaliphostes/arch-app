@@ -1,8 +1,7 @@
 export * from './Hamburger'
-export * from './gl'
-export * from './utils'
+export * from "./gl-helpers/gl"
+export * from './gl-helpers/utils'
 export * from './App'
 export * from './PanelsContainer'
-export * from './OrientationGizmo'
 
-export * from './skins'
+// export * from './skins'

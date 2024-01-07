@@ -1,21 +1,14 @@
 import { Skin } from './Skin'
 import { Object3D } from 'three'
 import * as kepler from "@youwol/kepler"
-import { Surface } from '../loaders'
+// import { Surface } from '../loaders/surfaces'
 import { FolderApi, Pane } from 'tweakpane'
-import { ColorGUIHelper } from '../utils'
+import { ColorGUIHelper } from '../gl-helpers/utils'
 
-export const Borders = {
+export const BBox = {
 
     createObject: (parent: Surface): Object3D => {
-        const skin = kepler.createSurfaceBorders({
-            mesh: parent.surface,
-            parameters: new kepler.LinesetParameters({
-                color: '#000000',
-                useTube: false,
-                tubeRadius: 1
-            })
-        })
+        const skin = kepler.createBBox(parent.surface, new kepler.BBoxParameters({ color: '#000000' }))
 
         skin.visible = false
         skin.userData.pickable = false
@@ -26,7 +19,7 @@ export const Borders = {
 
     createPanel: (object: Object3D, parent: Pane): FolderApi => {
         const folder = parent.addFolder({
-            title: 'Borders'
+            title: 'Bounding box'
         })
 
         folder.addBinding(object, 'visible', { label: 'Show' })
