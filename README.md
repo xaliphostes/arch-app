@@ -4,11 +4,12 @@
     <a href="https://xaliphostes.github.io/arch-app/"><b>Launch the app...</b></a>
 </p>
 
+Here is a [project](projects/tet.zip) example for this Arch webapp.
+
 ---
 
 <h3>To do list 1</h3>
 
-- Have a json file for a model, including the n computations (with pressure or not)
 - Have a panel to change the remote / pressures / density / young
 - Change from hydro to litho ?
 - All skins for discontinuities are global for all of them
@@ -19,7 +20,7 @@
 
 <h3>To do list 2 (later on)</h3>
 
-- Have a possibioity to call Arch from the browser (wasm) in order to compute stress at new grids (wells...)
+- Have a possibility to call Arch from the browser (wasm) in order to compute stress at new grids (wells...)
 - Have the dynamic streamline in 3D inside a ficticious grid
 
 <h3>To do list 3</h3>
