@@ -17,7 +17,11 @@ export type GLParameters = {
     controls: TrackballControls,
     renderFct: RenderFunctions,
     picker: Picker2,
-    group: Group,
+
+    faults: Group,
+    grids: Group,
+    cavities: Group,
+
     helper: ViewHelper2,
     baseGrid: Group,
     lights: Group,
@@ -34,7 +38,11 @@ export let glParameters = {
     controls: undefined,
     renderFct: undefined,
     picker: undefined,
-    group: undefined,
+
+    faults: undefined,
+    grids: undefined,
+    cavities: undefined,
+
     helper: undefined,
     baseGrid: undefined,
     lights: undefined,
@@ -46,14 +54,13 @@ export let glParameters = {
 
 // ------------------------------------------------------
 
-export function initGl(
-    { div, backgroundColor = 0xa5a5a5 }:
-        { div: string, backgroundColor?: number }) {
+export function initGl({ div, backgroundColor = 0xa5a5a5 }:{ div: string, backgroundColor?: number }) {
     const canvas = document.getElementById(div)
 
     const renderer = new WebGLRenderer({
         canvas: canvas, antialias: true
     })
+    
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.shadowMap.enabled = glParameters.parameters.shadows // !!!!!!!!!!! <================ !!!!!!!!!!!
 
@@ -92,11 +99,34 @@ export function initGl(
 
     glParameters.scene = scene
 
-    const group = new Group()
-    group.name = 'MainGroup'
-    group.userData.pickable = false
-    glParameters.group = group
-    scene.add(group)
+    {
+        // const group = new Group()
+        // group.name = 'others'
+        // group.userData.pickable = false
+        // glParameters.group = group
+        // scene.add(group)
+    }
+    {
+        const group = new Group()
+        group.name = 'faults'
+        // group.userData.pickable = false
+        glParameters.faults = group
+        scene.add(group)
+    }
+    {
+        const group = new Group()
+        group.name = 'grids'
+        // group.userData.pickable = false
+        glParameters.grids = group
+        scene.add(group)
+    }
+    {
+        const group = new Group()
+        group.name = 'cavities'
+        // group.userData.pickable = false
+        glParameters.cavities = group
+        scene.add(group)
+    }
 
     const camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100000)
     camera.position.z = 3

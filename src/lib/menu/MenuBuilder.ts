@@ -25,24 +25,30 @@ menu.append(
 
 
 export class MenuBuilder {
+    private div: HTMLDivElement = undefined
     private ul: HTMLUListElement = undefined
 
     constructor(parentId: string, id: string = 'navbarSupportedContent') {
-        const div = this.create('div', 'collapse navbar-collapse', id)
+        this.div = this.create('div', 'collapse navbar-collapse', id) as HTMLDivElement
+
         this.ul = this.create('ul', 'navbar-nav me-auto mb-2 mb-lg-0') as HTMLUListElement
-        div.appendChild(this.ul)
+        this.div.appendChild(this.ul)
 
         const parent = document.getElementById(parentId)
-        parent.append(div)
+        parent.append(this.div)
     }
 
     append(li: string) {
         this.ul.innerHTML += li
     }
 
+    end() {
+        // ?
+    }
+
     private create(type: string, classes: string = undefined, id: string = ''): HTMLElement {
         const d = document.createElement(type)
-        classes.split(' ').forEach( c => d.classList.add(c) )
+        classes.split(' ').forEach(c => d.classList.add(c))
         d.id = id
         return d
     }

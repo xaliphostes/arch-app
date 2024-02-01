@@ -114,6 +114,7 @@ class ViewHelper2 extends Object3D {
         this.superParent.add(this.backgroundSphere, this.axesLines, ...this.spritePoints);
 
         this.domContainer = getDomContainer(placement, size);
+        this.domContainer.id = "view-helper-container"
 
         // This may cause confusion if the parent isn't the body and doesn't have a `position:relative`
         this.domElement.parentElement!.appendChild(this.domContainer);

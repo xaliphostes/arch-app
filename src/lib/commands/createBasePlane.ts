@@ -8,6 +8,9 @@ export function createBasePlane(object: Object3D): void {
     let radius = 1
     let center = new Vector3(0, 0, 0)
 
+    if (glParameters.baseGrid !== undefined) {
+    }
+
     if (glParameters.baseGrid === undefined) {
         glParameters.baseGrid = new Group()
         glParameters.baseGrid.userData.isPickable = false

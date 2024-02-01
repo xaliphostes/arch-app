@@ -1,16 +1,16 @@
 import { Mesh } from 'three'
 
 export enum BC {
-    TRACTION=0,
-    DISPLACEMENT=1,
-    UNDEFINED=2
+    TRACTION = 0,
+    DISPLACEMENT = 1,
+    UNDEFINED = 2
 }
 
 export function getBcName(bc: BC) {
-    if (bc===BC.TRACTION) {
+    if (bc === BC.TRACTION) {
         return 'free'
     }
-    if (bc===BC.DISPLACEMENT) {
+    if (bc === BC.DISPLACEMENT) {
         return 'fixed'
     }
     return 'undefined'
@@ -28,11 +28,11 @@ export function fromNameToBc(name: string): BC {
     return BC.UNDEFINED
 }
 
-export function addSetupTo(mesh: Mesh) {
+export function addSetupTo(mesh: Mesh, isCavity = false) {
     mesh.userData.setup = {
         active: true,
         bcx: 0,
         bcy: 0,
-        bcz: 1,
+        bcz: isCavity ? 0 : 1,
     }
 }

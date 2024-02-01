@@ -65,7 +65,7 @@ export function editPanel(
         })
         btn.on('click', () => {
             if (mesh !== undefined) {
-                glParameters.group.remove(mesh)
+                glParameters.faults.remove(mesh)
                 // App.objectPanel().hide()
             }
         })

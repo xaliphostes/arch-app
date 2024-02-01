@@ -1,79 +1,71 @@
 import { MenuBuilder } from "./MenuBuilder"
+import { loadModelMenu } from "./loadModelMenu"
+import { helpMenu } from "./helpMenu"
+import { generateMenuForPanel } from "./generateMenuForPanel"
+import { modelInfo } from "./modelInfo"
+import { infoZipModelMenu } from "./infoZipModelMenu"
 import { clearModelMenu } from "./clearModelMenu"
-import { generateMenu } from "./generateMenu"
-import { loadFaultsMenu } from "./loadFaultsMenu"
+import { importObjectMenu } from "./importObjectMenu"
+import { glParameters } from "../gl-helpers/gl"
+import { ModelObjectType } from "../arch/Model"
+
+// generateMenuForPanel({
+//     panelName: 'surface-display',
+//     title: 'Surface display',
+//     menuDiv: 'fault-display', // existing
+//     panelDiv: 'fault-display-panel' // will create
+// })
 
 export function setupMenu() {
 
-    prepareDom() // see below
+    prepareDom()
 
-    // ------------------------------
+    // ----------------------------------------------------
 
-    loadFaultsMenu()
-    // loadGridsMenu()
-    clearModelMenu()
-
-    // ------------------------------
+    loadModelMenu()
+    infoZipModelMenu()
+    importObjectMenu({elementName: 'import-faults', filters: '.ts, .gcd', parent: glParameters.faults, type: ModelObjectType.FAULT})
+    importObjectMenu({elementName: 'import-cavities', filters: '.ts, .gcd', parent: glParameters.cavities, type: ModelObjectType.CAVITY})
+    importObjectMenu({elementName: 'import-grids', filters: '.ts, .gcd, .xyz, .vs, .pl, .so', parent: glParameters.grids, type: ModelObjectType.GRID})
+    importObjectMenu({elementName: 'import-wells', filters: '.pl, .xyz', parent: glParameters.grids, type: ModelObjectType.WELL})
     
-    generateMenu({
-        panelName: 'material', 
-        title: 'Material', 
-        menuDiv: 'model-material-menu', // existing
-        panelDiv: 'model-material-panel' // will create
-    })
 
-    generateMenu({
-        panelName: 'remote', 
-        title: 'Remote stress', 
+    generateMenuForPanel({
+        panelName: 'remote',
+        title: 'Remote stress',
         menuDiv: 'model-remote-menu', // existing
         panelDiv: 'model-remote-panel' // will create
     })
 
-    generateMenu({
-        panelName: 'model-parameters', 
-        title: 'Other parameters', 
-        menuDiv: 'model-other-menu', // existing
-        panelDiv: 'model-other-panel' // will create
-    })
+    modelInfo()
+    clearModelMenu()
 
-    generateMenu({
-        panelName: 'simulation', 
-        title: 'Simulation', 
-        menuDiv: 'model-simulation-menu', // existing
-        panelDiv: 'model-simulation-panel' // will create
-    })
-
-    // ------------------------------
-
-    generateMenu({
-        panelName: 'surface-display', 
-        title: 'Surface display', 
-        menuDiv: 'fault-display', // existing
-        panelDiv: 'fault-display-panel' // will create
-    })
-    
-    generateMenu({
-        panelName: 'boundary-conditions', 
-        title: 'Boundary conditions', 
-        menuDiv: 'fault-bc-menu', // existing
-        panelDiv: 'fault-bc-panel' // will create
-    })
-
-    // ------------------------------
-
-    generateMenu({
-        panelName: 'general', 
-        title: 'General', 
-        menuDiv: 'menu-general', 
+    generateMenuForPanel({
+        panelName: 'general',
+        title: 'General',
+        menuDiv: 'menu-general',
         panelDiv: 'general-display'
     })
 
-    // ------------------------------
+    document.getElementById('view-tools').addEventListener('click', _ => {
+        const e = document.getElementById('viewToolsMenu')
+        e.hidden = !e.hidden
+    })
 
+    document.getElementById('view-roses').addEventListener('click', _ => {
+        const e = document.getElementById('main-rose-container')
+        e.hidden = !e.hidden
+    })
+
+    document.getElementById('view-helper').addEventListener('click', _ => {
+        const e = document.getElementById('view-helper-container')
+        e.hidden = !e.hidden
+    })
 }
 
 function prepareDom() {
     const builder = new MenuBuilder('main-fluid-container')
+
     builder.append(`
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -81,8 +73,15 @@ function prepareDom() {
             Files
         </a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" id="load-faults">Load faults (Gocad TS files)</a></li>
-            <li><a class="dropdown-item" href="#">Load grids (Gocad TS files)</a></li>
+            <li><a class="dropdown-item" href="#" id="load-model">Load ARCH model (zip)</a></li>
+            <li><a class="dropdown-item" href="#" id="info-zip-model">Content of a ARCH model (zip)</a></li>
+
+            <div class="dropdown-divider"></div>
+
+            <li><a class="dropdown-item" href="#" id="import-faults">Import faults</a></li>
+            <li><a class="dropdown-item" href="#" id="import-cavities">Import cavities</a></li>
+            <li><a class="dropdown-item" href="#" id="import-grids">Import grids</a></li>
+            <li><a class="dropdown-item" href="#" id="import-wells">Import wells</a></li>
         </ul>
     </li>`)
 
@@ -93,34 +92,31 @@ function prepareDom() {
             Model
         </a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" id="model-material-menu">Material</a></li>
             <li><a class="dropdown-item" href="#" id="model-remote-menu">Remote</a></li>
-            <li><a class="dropdown-item" href="#" id="model-other-menu">Other</a></li>
-            <li><a class="dropdown-item" href="#" id="model-simulation-menu">Simulation</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
+            <li><a class="dropdown-item" href="#" id="model-info">Info</a></li>
+            <div class="dropdown-divider"></div>
             <li><a class="dropdown-item" href="#" id="clear-model">Clear</a></li>
         </ul>
     </li>`)
+
+    // builder.append(`
+    // <li class="nav-item">
+    //     <a class="nav-link" href="#" id="menu-general">Options</a>
+    // </li>`)
 
     builder.append(`
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            Object
+            View
         </a>
         <ul class="dropdown-menu">
-
-            <li><a class="dropdown-item" href="#" id="fault-export-ply">Export PLY</a></li>
-            <li><a class="dropdown-item" href="#" id="fault-export-gltf">Export GLTF</a></li>
-            <li><a class="dropdown-item" href="#" id="fault-edit">Edit</a></li>
-            <li><a class="dropdown-item" href="#" id="fault-bc-menu">Boundary conditions</a></li>
+            <li><a class="dropdown-item" href="#" id="menu-general"><strong>General</strong></a></li>
+            <li><a class="dropdown-item" href="#" id="view-roses">Rose diagrams</a></li>
+            <li><a class="dropdown-item" href="#" id="view-helper">Helper</a></li>
+            <li><a class="dropdown-item" href="#" id="view-tools">Toolbar</a></li>
         </ul>
     </li>`)
 
-    builder.append(`
-    <li class="nav-item">
-        <a class="nav-link" href="#" id="menu-general">General</a>
-    </li>`)
+    helpMenu(builder)
 }

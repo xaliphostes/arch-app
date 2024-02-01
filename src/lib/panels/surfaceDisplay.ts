@@ -6,7 +6,8 @@ import { GLParameters } from '../gl-helpers/gl'
 import { minMaxArray } from '@youwol/math'
 import * as kepler from "@youwol/kepler"
 import { Serie } from '@youwol/dataframe'
-import { attributeNames, scalar } from '../loaders/surfaces'
+import { attributeNames, scalar } from '../loaders/objectUtils'
+// import { attributeNames, scalar } from '../loaders/surfaces'
 
 /*
     Parent
@@ -85,15 +86,6 @@ export function surfaceDisplay(
         }
     }
 
-    addBasic(mesh, parent, updatePainting)
-    addWireframe(mesh, parent)
-    addPoints(mesh, parent)
-    addBBox(mesh, parent)
-    addBorders(mesh, parent)
-    
-    const folder = parent.addFolder({title: 'Painting'})
-    folder.expanded = true
-
     let coloring = mesh.userData.coloring as Coloring
 
     if (coloring === undefined) {
@@ -127,9 +119,32 @@ export function surfaceDisplay(
         } as Coloring
     }
 
+    addBasic(mesh, parent, updatePainting)
+    addWireframe(mesh, parent)
+    addPoints(mesh, parent)
+    addBBox(mesh, parent)
+    addBorders(mesh, parent)
+    
+    const folder = parent.addFolder({title: 'Painting'})
+    folder.expanded = true
+
     folder.addBinding(coloring, 'visible', { label: 'Paint attribute' }).on('change', e => {
         updatePainting()
     })
+
+    function whichType() {
+        if (coloring.type === 'plain') {
+            coloring.isocontours.panes.nb.hidden = true
+            coloring.isocontours.panes.filled.hidden = true
+            coloring.isocontours.panes.lined.hidden = true
+        }
+        else {
+            coloring.isocontours.panes.nb.hidden = false
+            coloring.isocontours.panes.filled.hidden = false
+            coloring.isocontours.panes.lined.hidden = false
+        }
+        updatePainting()
+    }
 
     const t = folder.addBlade({
         view: 'list',
@@ -142,17 +157,7 @@ export function surfaceDisplay(
     }) as ListBladeApi<string>
     t.on('change', e => {
         coloring.type = e.value
-        if (coloring.type === 'plain') {
-            coloring.isocontours.panes.nb.hidden = true
-            coloring.isocontours.panes.filled.hidden = true
-            coloring.isocontours.panes.lined.hidden = true
-        }
-        else {
-            coloring.isocontours.panes.nb.hidden = false
-            coloring.isocontours.panes.filled.hidden = false
-            coloring.isocontours.panes.lined.hidden = false
-        }
-        updatePainting()
+        whichType()
     })
 
     let names = attributeNames(mesh)
@@ -212,15 +217,19 @@ export function surfaceDisplay(
     })
     coloring.isocontours.panes.lined = c
     c.hidden = true
+
+    whichType()
 }
 
 // -------------------------------
 
 function addBasic(mesh: Object3D, parent: FolderApi, update: Function) {
     const material = mesh.material
+    let coloring = mesh.userData.coloring as Coloring
 
     parent.addBinding(mesh, 'visible', { label: 'Show' }).on('change', e => {
         mesh.userData.visi = e.value
+        // coloring.visible = e.value
         update()
     })
     parent.addBinding(material, 'flatShading', { label: 'Flat' }).on('change', () => material.needsUpdate = true)

@@ -19,7 +19,7 @@ export function populateGlDebug() {
         const mesh = new Mesh(geometry, material)
         mesh.translateX(-1)
         mesh.name = 'Sphere'
-        glParameters.group.add(mesh)
+        glParameters.faults.add(mesh)
         // addMesh({ mesh, group: glParameters.group })
     }
     {
@@ -33,17 +33,17 @@ export function populateGlDebug() {
         const mesh = new Mesh(geometry, material)
         mesh.translateX(1)
         mesh.name = 'Box'
-        glParameters.group.add(mesh)
+        glParameters.faults.add(mesh)
         // addMesh({ mesh, group: glParameters.group })
     }
 
-    createDefaultLights(glParameters.group)
-    createBasePlane(glParameters.group)
+    createDefaultLights(glParameters.scene)
+    createBasePlane(glParameters.scene)
 
     fitScene({
         scene: glParameters.scene, 
         camera: glParameters.camera, 
         controls: glParameters.controls,
-        selection: glParameters.group
+        selection: glParameters.scene
     })
 }

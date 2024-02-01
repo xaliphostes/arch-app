@@ -3,9 +3,9 @@ import { ListBladeApi, FolderApi } from 'tweakpane'
 import { ColorGUIHelper } from '../gl-helpers/utils'
 import { GLParameters } from '../gl-helpers/gl'
 import { minMaxArray } from '@youwol/math'
-import { scalar } from '../loaders/surfaces'
 import { Surface, addBBox, addBorders, addPoints, addWireframe } from '../gl-helpers/Surface'
 import { colorMapNames } from '@youwol/kepler'
+import { scalar } from '../loaders/objectUtils'
 
 type UpdateFunction = () => void
 

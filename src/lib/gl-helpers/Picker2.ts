@@ -9,6 +9,8 @@ import { GLTFExporter } from 'three-stdlib'
 import { generatePanel } from '../panels/generatePanel'
 // import { PLYExporter } from 'three-stdlib'
 
+import { signal } from '@preact/signals'
+
 export class Picker2 {
     renderer: WebGLRenderer = undefined
     camera: Camera = undefined
@@ -54,12 +56,10 @@ export class Picker2 {
             })
         }
 
-        {
+        if (0) {
             const g = document.getElementById('fault-export-ply')
             g.addEventListener('click', e => {
                 if (this.curSelection !== undefined) {
-                    // console.log(this.curSelection.geometry.attributes.position)
-                    // console.log(this.curSelection.geometry.index)
                     const exporter = new PLYExporter()
                     exporter.parse(
                         this.curSelection,
@@ -75,12 +75,10 @@ export class Picker2 {
             })
         }
 
-        {
+        if (0) {
             const g = document.getElementById('fault-export-gltf')
             g.addEventListener('click', e => {
                 if (this.curSelection !== undefined) {
-                    // console.log(this.curSelection.geometry.attributes.position)
-                    // console.log(this.curSelection.geometry.index)
                     const exporter = new GLTFExporter()
                     exporter.parse(
                         this.curSelection,
@@ -124,14 +122,9 @@ export class Picker2 {
             // The closest pickable object...
             const object = intersectedObject(intersects)
             if (object !== undefined) {
-                /*if (object !== this.curSelection)*/ {
-                    this.curSelection = object
-                    glParameters.lastSelection = object
-                    this.displayPanel()
-                }
-                // else {
-                //     // Do nothing as the panel is already here
-                // }
+                this.curSelection = object
+                glParameters.lastSelection = object
+                this.displayPanel()
             }
             else {
                 this.hidePanel()
@@ -155,31 +148,6 @@ export class Picker2 {
             return
         }
 
-        // const div = document.getElementById('object-display')
-        // const parent = new Pane({
-        //     container: div,
-        //     title: 'Display'
-        // })
-        // parent.addBlade({
-        //     view: 'text',
-        //     label: 'Selected object',
-        //     parse: (v) => String(v),
-        //     value: this.curSelection.name
-        // })
-        // parent.element.style.top = '200px'
-        // surfaceDisplay({
-        //     mesh: this.curSelection,
-        //     params: glParameters,
-        //     parent
-        // })
-        // parent.addButton({
-        //     title: 'Close'
-        // }).on('click', e => {
-        //     parent.dispose()
-        //     this.panel = undefined
-        // })
-
-        // this.panel = parent
         generatePanel({
             panelName: 'surface-display',
             title: `Display for ${this.curSelection.name}`,
