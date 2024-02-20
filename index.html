@@ -171,11 +171,18 @@
     </a>
 
     <div class="container" id="main-rose-container"
-        style="position: absolute; top: 100;right: 10px; width: 300px; background-color: white; opacity: 50%;">
-        <h2 style="text-align:center">Rose diagrams</h2>
+        style="position: absolute; top: 100;right: 10px; width: 300px; background-color: white; opacity: 75%;">
+        <!-- <h4 style="text-align:center">Rose diagrams</h4> -->
         <div class="panel panel-default">
-            <!-- <div class="panel-body">Panel Content</div> -->
-            <div class="row" id="rose-container">
+            <div class="panel-body">Property
+                <select class="custom-select" id="dropdownPropertyRose">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="row" id="rose-container" style="background-color: #777777;">
                 <div class="col-sm-6" style="text-align:center">Observed</div>
                 <div class="col-sm-6" style="text-align:center">Predicted</div>
             </div>
